@@ -2,11 +2,8 @@ def _index(item, seq):
     """Helper function that returns -1 for non-found index value of a seq"""
     return seq.index(item) if item in seq else -1
 
-
 def a_star(puzzle, h):
-    """Performs A* search for goal state.
-    h(puzzle) - heuristic function, returns an integer
-    """
+
     openl = [puzzle]
     closedl = []
     move_count = 0

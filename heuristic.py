@@ -1,3 +1,4 @@
+#Here all the Heristic will be defined and calculated
 def _heuristic(puzzle, item_total_calc, total_calc):
     """
     Heuristic template that provides the current and target position for each number and the
@@ -25,7 +26,7 @@ def _heuristic(puzzle, item_total_calc, total_calc):
 
     return total_calc(t)
 
-
+#returning manhattan heurisitic 
 def h_manhattan(puzzle):
     return _heuristic(puzzle,
                       lambda r, tr, c, tc: abs(tr - r) + abs(tc - c),
@@ -37,7 +38,7 @@ def hamming(row, target_row, column, target_column):
         return 1
     return 0
 
-
+#returning hamming heurisitic 
 def h_hamming(puzzle):
     return _heuristic(puzzle,
                       hamming,

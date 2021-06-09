@@ -27,7 +27,7 @@ class Puzzle:
 
     def _copy(self):
         return Puzzle(copy.deepcopy(self.adj_matrix))
-
+#return all possible moves of empty space (zero puzzle)
     def _get_possible_moves(self):
         row, col = self.find(0)
         legal = []
@@ -42,7 +42,7 @@ class Puzzle:
             legal.append((row, col + 1))
 
         return legal
-
+#taking the possible moves and generating a valid move
     def generate_moves(self):
         possible_moves = self._get_possible_moves()
         zero = self.find(0)
@@ -55,7 +55,7 @@ class Puzzle:
             return p
 
         return map(lambda puzzle_to_swap: swap_and_clone(zero, puzzle_to_swap), possible_moves)
-
+#finds the position of the element value 
     def find(self, value):
         if value < 0 or value > 8:
             raise Exception("value out of range")
@@ -70,32 +70,12 @@ class Puzzle:
 
     def set(self, row, col, value):
         self.adj_matrix[row][col] = value
-
+#swaping position of two values
     def swap(self, pos_a, pos_b):
         temp = self.get(*pos_a)
         self.set(pos_a[0], pos_a[1], self.get(*pos_b))
         self.set(pos_b[0], pos_b[1], temp)
-
+#checking if the swapped puzzle equals the goal state 
     def is_solved(self):
         return self.adj_matrix == Puzzle.GOAL_STATE
-
-
-if __name__ == '__main__':
-    initial_state = [
-        [1, 5, 2],
-        [4, 0, 3],
-        [7, 8, 6]
-    ]
-    p = copy.deepcopy(initial_state)
-    p2 = [[], [], []]
-
-    start = time.time()
-    clock_start = timeit.default_timer()
-    is_solvable(initial_state)
-    elapsed_time = time.time() - start
-    elapsed_clock = timeit.default_timer() - clock_start
-    print("Solveable?", is_solvable(initial_state))
-    p = Puzzle(initial_state)
-    count = a_star(p, h_hamming)
-    print("time", elapsed_time, "count", count)
 
